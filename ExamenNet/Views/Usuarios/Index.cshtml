@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ExamenNet.Models.Usuarios>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PasswordUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sucursal)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PasswordUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sucursal.NombreSucursal)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID_Usuarios">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID_Usuarios">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID_Usuarios">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

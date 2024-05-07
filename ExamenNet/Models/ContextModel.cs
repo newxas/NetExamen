@@ -10,5 +10,6 @@ namespace ExamenNet.Models
 
         public DbSet<Sucursal> Sucursal { get; set; }
         public DbSet<Promociones> Promociones { get; set; }
+        public DbSet<Usuarios> Usuarios { get; set; }
     }
 }
