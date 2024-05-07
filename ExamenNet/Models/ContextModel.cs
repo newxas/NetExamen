@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ExamenNet.Models;
 
 namespace ExamenNet.Models
 {
@@ -11,5 +12,6 @@ namespace ExamenNet.Models
         public DbSet<Sucursal> Sucursal { get; set; }
         public DbSet<Promociones> Promociones { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<Clientes> Clientes { get; set;}
     }
 }
