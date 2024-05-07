@@ -47,7 +47,7 @@ namespace ExamenNet.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
-            ViewData["ID_Sucursal"] = new SelectList(_context.Sucursal, "ID_Sucursal", "ID_Sucursal");
+            ViewData["ID_Sucursal"] = new SelectList(_context.Sucursal, "ID_Sucursal", "NombreSucursal");
             return View();
         }
 
@@ -81,7 +81,7 @@ namespace ExamenNet.Controllers
             {
                 return NotFound();
             }
-            ViewData["ID_Sucursal"] = new SelectList(_context.Sucursal, "ID_Sucursal", "ID_Sucursal", usuarios.ID_Sucursal);
+            ViewData["ID_Sucursal"] = new SelectList(_context.Sucursal, "ID_Sucursal", "NombreSucursal", usuarios.ID_Sucursal);
             return View(usuarios);
         }
 
