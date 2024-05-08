@@ -18,33 +18,24 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Sucursals" asp-action="Index">Sucursales</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Promociones" asp-action="Index">Promociones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ventas" asp-action="Index">Ventas</a>
+                    <ul class="navbar-nav flex-grow-1"> 
+                        @if (User.IsInRole("Gerente"))
+                        {
+                            @Html.Partial("_Admin")     
+                        }
+                        else if (User.IsInRole("Asesor de Venta"))
+                        {
+                            @Html.Partial("_Usuario")
+                        }      
+                    </ul>
+                    <ul class="navbar-nav d-flex">
+                        <li class="d-flex">
+                            <a class="nav-link text-dark">Bienvenido @User.Identity.Name</a>
+                            <a class="nav-link text-dark" asp-controller="Usuarios" asp-action="Salir">Cerrar Sesión</a>
                         </li>
                     </ul>
                 </div>
+    
             </div>
         </nav>
     </header>
