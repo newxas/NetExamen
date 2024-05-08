@@ -181,5 +181,11 @@ namespace ExamenNet.Controllers
         {
           return (_context.Ventas?.Any(e => e.ID_venta == id)).GetValueOrDefault();
         }
+
+        //Menu
+        public IActionResult Menu()
+        {
+            return View();
+        }
     }
 }
