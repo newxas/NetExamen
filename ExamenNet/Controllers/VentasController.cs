@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExamenNet.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExamenNet.Controllers
 {
+    [Authorize]
     public class VentasController : Controller
     {
         private readonly ContextModel _context;
@@ -91,10 +93,10 @@ namespace ExamenNet.Controllers
             {
                 return NotFound();
             }
-            ViewData["ID_Cliente"] = new SelectList(_context.Clientes, "ID_Cliente", "ID_Cliente", ventas.ID_Cliente);
-            ViewData["ID_Producto"] = new SelectList(_context.Productos, "ID_Producto", "ID_Producto", ventas.ID_Producto);
-            ViewData["ID_Promocion"] = new SelectList(_context.Promociones, "ID_Promocion", "ID_Promocion", ventas.ID_Promocion);
-            ViewData["ID_Usuarios"] = new SelectList(_context.Usuarios, "ID_Usuarios", "ID_Usuarios", ventas.ID_Usuarios);
+            ViewData["ID_Cliente"] = new SelectList(_context.Clientes, "ID_Cliente", "NombreCliente", ventas.ID_Cliente);
+            ViewData["ID_Producto"] = new SelectList(_context.Productos, "ID_Producto", "NombreProducto", ventas.ID_Producto);
+            ViewData["ID_Promocion"] = new SelectList(_context.Promociones, "ID_Promocion", "NombrePromocion", ventas.ID_Promocion);
+            ViewData["ID_Usuarios"] = new SelectList(_context.Usuarios.Where(y => y.Rol == "Asesor de Venta"), "ID_Usuarios", "NombreUsuario", ventas.ID_Usuarios);
             return View(ventas);
         }
 

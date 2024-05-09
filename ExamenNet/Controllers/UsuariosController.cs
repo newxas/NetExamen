@@ -207,7 +207,7 @@ namespace ExamenNet.Controllers
 
                     var claimsIndentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIndentity));
-                    return RedirectToAction("Index", "Usuarios");
+                    return RedirectToAction("Index", "Home");
                 }
 
             }

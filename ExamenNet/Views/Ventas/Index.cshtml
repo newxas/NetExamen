@@ -9,70 +9,72 @@
 </p> *@
 
 <div class="container p-5">
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoVenta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaVenta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubTotal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Total)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Promociones)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Productos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuarios)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Clientes)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoVenta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaVenta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Promociones.ID_Promocion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Productos.ID_Producto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuarios.ID_Usuarios)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Clientes.ID_Cliente)
-            </td>
-            <td>
-                <a asp-action="Edit" class="btn btn-success" asp-route-id="@item.ID_venta">Edit</a> |
-                <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.ID_venta">Details</a> |
-                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.ID_venta">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <a class="btn btn-danger" asp-action="Menu">Regresar</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoVenta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaVenta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubTotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Promociones)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Productos)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Usuarios)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Clientes)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoVenta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaVenta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Promociones.ID_Promocion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Productos.ID_Producto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuarios.ID_Usuarios)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Clientes.ID_Cliente)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" class="btn btn-success" asp-route-id="@item.ID_venta">Edit</a> |
+                        <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.ID_venta">Details</a> |
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.ID_venta">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

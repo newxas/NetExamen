@@ -4,66 +4,68 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Ventas</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="container p-5">
+    <form asp-action="Edit">
+        <div class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID_venta" />
-            <div class="form-group">
-                <label asp-for="TipoVenta" class="control-label"></label>
-                <input asp-for="TipoVenta" class="form-control" />
-                <span asp-validation-for="TipoVenta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaVenta" class="control-label"></label>
-                <input asp-for="FechaVenta" class="form-control" />
-                <span asp-validation-for="FechaVenta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SubTotal" class="control-label"></label>
-                <input asp-for="SubTotal" class="form-control" />
-                <span asp-validation-for="SubTotal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" />
-                <span asp-validation-for="Total" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ID_Promocion" class="control-label"></label>
-                <select asp-for="ID_Promocion" class="form-control" asp-items="ViewBag.ID_Promocion"></select>
-                <span asp-validation-for="ID_Promocion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ID_Producto" class="control-label"></label>
-                <select asp-for="ID_Producto" class="form-control" asp-items="ViewBag.ID_Producto"></select>
-                <span asp-validation-for="ID_Producto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ID_Usuarios" class="control-label"></label>
-                <select asp-for="ID_Usuarios" class="form-control" asp-items="ViewBag.ID_Usuarios"></select>
-                <span asp-validation-for="ID_Usuarios" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ID_Cliente" class="control-label"></label>
-                <select asp-for="ID_Cliente" class="form-control" asp-items="ViewBag.ID_Cliente"></select>
-                <span asp-validation-for="ID_Cliente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="TipoVenta" class="control-label"></label>
+                    <input asp-for="TipoVenta" class="form-control" />
+                    <span asp-validation-for="TipoVenta" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaVenta" class="control-label"></label>
+                    <input asp-for="FechaVenta" class="form-control" />
+                    <span asp-validation-for="FechaVenta" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ID_Promocion" class="control-label"></label>
+                    <select asp-for="ID_Promocion" class="form-control" asp-items="ViewBag.ID_Promocion"></select>
+                    <span asp-validation-for="ID_Promocion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ID_Producto" class="control-label"></label>
+                    <select asp-for="ID_Producto" class="form-control" asp-items="ViewBag.ID_Producto"></select>
+                    <span asp-validation-for="ID_Producto" class="text-danger"></span>
+                </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+                <div class="form-group">
+                    <label asp-for="ID_Cliente" class="control-label"></label>
+                    <select asp-for="ID_Cliente" class="form-control" asp-items="ViewBag.ID_Cliente"></select>
+                    <span asp-validation-for="ID_Cliente" class="text-danger"></span>
+                </div>
+               
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="SubTotal" class="control-label"></label>
+                    <input asp-for="SubTotal" class="form-control" />
+                    <span asp-validation-for="SubTotal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Total" class="control-label"></label>
+                    <input asp-for="Total" class="form-control" />
+                    <span asp-validation-for="Total" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ID_Usuarios" class="control-label"></label>
+                    <select asp-for="ID_Usuarios" class="form-control" asp-items="ViewBag.ID_Usuarios"></select>
+                    <span asp-validation-for="ID_Usuarios" class="text-danger"></span>
+                </div>
+
+                <div class="form-group p-4 text-center">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a class="btn btn-danger" asp-action="Index">Regresar</a>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

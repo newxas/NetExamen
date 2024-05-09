@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExamenNet.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExamenNet.Controllers
 {
+    [Authorize]
     public class SucursalsController : Controller
     {
         private readonly ContextModel _context;
@@ -157,6 +159,12 @@ namespace ExamenNet.Controllers
         private bool SucursalExists(int id)
         {
           return (_context.Sucursal?.Any(e => e.ID_Sucursal == id)).GetValueOrDefault();
+        }
+
+       //Menu
+        public IActionResult Menu()
+        {
+            return View();
         }
     }
 }
