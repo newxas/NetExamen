@@ -4,61 +4,98 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="container p-5">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Cliente</label>
+                    <select asp-for="ID_Cliente" class="form-control" asp-items="ViewBag.ID_Cliente"></select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tipo de Venta</label>
+                    @* <input asp-for="TipoVenta" class="form-control" /> *@
 
-<h4>Ventas</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TipoVenta" class="control-label"></label>
-                <input asp-for="TipoVenta" class="form-control" />
-                <span asp-validation-for="TipoVenta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaVenta" class="control-label"></label>
-                <input asp-for="FechaVenta" class="form-control" />
-                <span asp-validation-for="FechaVenta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SubTotal" class="control-label"></label>
-                <input asp-for="SubTotal" class="form-control" />
-                <span asp-validation-for="SubTotal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" />
-                <span asp-validation-for="Total" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ID_Promocion" class="control-label"></label>
-                <select asp-for="ID_Promocion" class ="form-control" asp-items="ViewBag.ID_Promocion"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="ID_Producto" class="control-label"></label>
-                <select asp-for="ID_Producto" class ="form-control" asp-items="ViewBag.ID_Producto"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="ID_Usuarios" class="control-label"></label>
-                <select asp-for="ID_Usuarios" class ="form-control" asp-items="ViewBag.ID_Usuarios"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="ID_Cliente" class="control-label"></label>
-                <select asp-for="ID_Cliente" class ="form-control" asp-items="ViewBag.ID_Cliente"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+                    <select asp-for="TipoVenta" class="form-control">
+                        <option value="Contado">Contado</option>
+                        <option value="Credito">Crédito</option>
+                    </select>
+                    <span asp-validation-for="TipoVenta" class="text-danger"></span>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Fecha de Venta</label>
+                    <input asp-for="FechaVenta" class="form-control" value="@ViewBag.FechaVenta" readonly="true" />
+                    <span asp-validation-for="FechaVenta" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Producto</label>
+                    <select id="id_prod" asp-for="ID_Producto" class="form-control" asp-items="ViewBag.ID_Producto"></select>
+                    <span asp-validation-for="ID_Producto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Promocion</label>
+                    <select id="id_prom" asp-for="ID_Promocion" class="form-control" asp-items="ViewBag.ID_Promocion"></select>
+                </div>
+            </div>
+            <div class="col-6">
+                <h4>Resumen</h4>
+                <hr />
+                <div class="form-group">
+                    <label asp-for="SubTotal" class="control-label"></label>
+                    <input id="id_sub" asp-for="SubTotal" class="form-control" readonly="true" />
+                    <span asp-validation-for="SubTotal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Total" class="control-label"></label>
+                    <input id="id_tot" asp-for="Total" class="form-control" readonly="true" />
+                    <span asp-validation-for="Total" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Asesor de Venta</label>
+                    <select asp-for="ID_Usuarios" class="form-control" asp-items="ViewBag.ID_Usuarios"></select>
+                </div>
+
+                <div class="form-group p-4  text-center">
+                    <input type="submit" value="Generar Venta" class="btn btn-primary" />
+                    <a class="btn btn-danger" asp-action="Menu">Regresar</a>
+                </div>
+            </div>          
+        </div>
+    </form>
+
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(function () {
+            $("#id_prod").change(function () {
+                $.ajax({
+                    url: "@Url.Action("ConsultaInfo","Ventas")",
+                    data: { idProduct: $(this).val() },
+                    type: "POST",
+                    success: function (data) {
+                        $("#id_sub").val(data)
+                        $("#id_tot").val(data)
+                    }
+                })
+            })
+
+            $("#id_prom").change(function () {
+                $.ajax({
+                    url: "@Url.Action("ConsultaProm","Ventas")",
+                    data: { idProm: $(this).val(), subTotal: $("#id_sub").val() },
+                    type: "POST",
+                    success: function (data) {
+                        $("#id_tot").val(data)
+                    }
+                })
+            })
+        })
+
+    </script>
 }

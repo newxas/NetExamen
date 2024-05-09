@@ -50,10 +50,11 @@ namespace ExamenNet.Controllers
         // GET: Ventas/Create
         public IActionResult Create()
         {
-            ViewData["ID_Cliente"] = new SelectList(_context.Clientes, "ID_Cliente", "ID_Cliente");
-            ViewData["ID_Producto"] = new SelectList(_context.Productos, "ID_Producto", "ID_Producto");
-            ViewData["ID_Promocion"] = new SelectList(_context.Promociones, "ID_Promocion", "ID_Promocion");
-            ViewData["ID_Usuarios"] = new SelectList(_context.Usuarios, "ID_Usuarios", "ID_Usuarios");
+            ViewData["FechaVenta"] = DateTime.Now.ToString("MM/dd/yyyy");
+            ViewData["ID_Cliente"] = new SelectList(_context.Clientes, "ID_Cliente", "NombreCliente");
+            ViewData["ID_Producto"] = new SelectList(_context.Productos, "ID_Producto", "NombreProducto");
+            ViewData["ID_Promocion"] = new SelectList(_context.Promociones, "ID_Promocion", "NombrePromocion");
+            ViewData["ID_Usuarios"] = new SelectList(_context.Usuarios.Where(x=>x.Rol == "Asesor de Venta"), "ID_Usuarios", "NombreUsuario");
             return View();
         }
 
@@ -186,6 +187,48 @@ namespace ExamenNet.Controllers
         public IActionResult Menu()
         {
             return View();
+        }
+
+
+        //JSON
+        [HttpPost]
+        public IActionResult ConsultaInfo(int idProduct)
+        {
+            var consultaPrecio = _context.Productos.Where(y=>y.ID_Producto == idProduct).FirstOrDefault().Precio;
+            var consultaImpuesto = _context.Productos.Where(y => y.ID_Producto == idProduct).FirstOrDefault().Impuesto;
+            double PrecioTotal = consultaPrecio + consultaImpuesto;
+            if (consultaPrecio > 0)
+            {
+                return Json( PrecioTotal);
+            }
+            else
+            {
+                return Json(new { success = false });
+            }            
+        }
+
+        [HttpPost]
+        public IActionResult ConsultaProm(int idProm, double subTotal)
+        {
+            if(subTotal > 0)
+            {
+                var consultaPromo = _context.Promociones.Where(y => y.ID_Promocion == idProm).FirstOrDefault().TotalPromocion;
+                
+                if (consultaPromo > 0)
+                {
+                    var CalculoPromo = (Convert.ToDouble(consultaPromo) * subTotal) / 100;
+                    double PrecioTotal = subTotal - CalculoPromo;
+                    return Json(PrecioTotal);
+                }
+                else
+                {
+                    return Json(subTotal);
+                }
+            }
+            else
+            {
+                return Json(new { success = false });
+            }               
         }
     }
 }
