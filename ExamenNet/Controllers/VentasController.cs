@@ -56,7 +56,7 @@ namespace ExamenNet.Controllers
             ViewData["ID_Cliente"] = new SelectList(_context.Clientes, "ID_Cliente", "NombreCliente");
             ViewData["ID_Producto"] = new SelectList(_context.Productos, "ID_Producto", "NombreProducto");
             ViewData["ID_Promocion"] = new SelectList(_context.Promociones, "ID_Promocion", "NombrePromocion");
-            ViewData["ID_Usuarios"] = new SelectList(_context.Usuarios.Where(x=>x.Rol == "Asesor de Venta"), "ID_Usuarios", "NombreUsuario");
+            ViewData["ID_Usuarios"] = new SelectList(_context.Usuarios.Where(x => x.Rol == "Asesor de Venta"), "ID_Usuarios", "NombreUsuario");
             return View();
         }
 
@@ -175,14 +175,14 @@ namespace ExamenNet.Controllers
             {
                 _context.Ventas.Remove(ventas);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VentasExists(int id)
         {
-          return (_context.Ventas?.Any(e => e.ID_venta == id)).GetValueOrDefault();
+            return (_context.Ventas?.Any(e => e.ID_venta == id)).GetValueOrDefault();
         }
 
         //Menu
@@ -196,26 +196,33 @@ namespace ExamenNet.Controllers
         [HttpPost]
         public IActionResult ConsultaInfo(int idProduct)
         {
-            var consultaPrecio = _context.Productos.Where(y=>y.ID_Producto == idProduct).FirstOrDefault().Precio;
-            var consultaImpuesto = _context.Productos.Where(y => y.ID_Producto == idProduct).FirstOrDefault().Impuesto;
-            double PrecioTotal = consultaPrecio + consultaImpuesto;
-            if (consultaPrecio > 0)
+            if (idProduct > 0)
             {
-                return Json( PrecioTotal);
+                var consultaPrecio = _context.Productos.Where(y => y.ID_Producto == idProduct).FirstOrDefault().Precio;
+                var consultaImpuesto = _context.Productos.Where(y => y.ID_Producto == idProduct).FirstOrDefault().Impuesto;
+                double PrecioTotal = consultaPrecio + consultaImpuesto;
+                if (consultaPrecio > 0)
+                {
+                    return Json(PrecioTotal);
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
             }
             else
             {
                 return Json(new { success = false });
-            }            
+            }
         }
 
         [HttpPost]
         public IActionResult ConsultaProm(int idProm, double subTotal)
         {
-            if(subTotal > 0)
+            if (subTotal > 0 && idProm > 0)
             {
                 var consultaPromo = _context.Promociones.Where(y => y.ID_Promocion == idProm).FirstOrDefault().TotalPromocion;
-                
+
                 if (consultaPromo > 0)
                 {
                     var CalculoPromo = (Convert.ToDouble(consultaPromo) * subTotal) / 100;
@@ -229,8 +236,9 @@ namespace ExamenNet.Controllers
             }
             else
             {
-                return Json(new { success = false });
-            }               
+                double PrecioTootal = 0;
+                return Json(PrecioTootal);
+            }
         }
     }
 }

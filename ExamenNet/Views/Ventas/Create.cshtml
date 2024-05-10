@@ -92,7 +92,11 @@
                     type: "POST",
                     success: function (data) {
                         $("#id_tot").val(data)
-                    }
+                    },
+                    error: function (data) {
+                        $("#id_sub").val(data)
+                        $("#id_tot").val(data)
+                    }                    
                 })
             })
         })

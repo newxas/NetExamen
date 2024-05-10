@@ -11,29 +11,33 @@
             <input type="hidden" asp-for="ID_venta" />
             <div class="col-6">
                 <div class="form-group">
-                    <label asp-for="TipoVenta" class="control-label"></label>
-                    <input asp-for="TipoVenta" class="form-control" />
+                    <label class="control-label">Tipo de Venta</label>
+                    @* <input asp-for="TipoVenta" class="form-control" /> *@
+                    <select asp-for="TipoVenta" class="form-control" readonly="true">
+                        <option value="Contado">Contado</option>
+                        <option value="Credito">Crédito</option>
+                    </select>
                     <span asp-validation-for="TipoVenta" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="FechaVenta" class="control-label"></label>
-                    <input asp-for="FechaVenta" class="form-control" />
+                    <label class="control-label">Fecha de Venta</label>
+                    <input asp-for="FechaVenta" class="form-control" readonly="true" />
                     <span asp-validation-for="FechaVenta" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ID_Promocion" class="control-label"></label>
-                    <select asp-for="ID_Promocion" class="form-control" asp-items="ViewBag.ID_Promocion"></select>
+                    <label class="control-label">Nombre Promoción</label>
+                    <select asp-for="ID_Promocion" class="form-control" asp-items="ViewBag.ID_Promocion" readonly="true"></select>
                     <span asp-validation-for="ID_Promocion" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ID_Producto" class="control-label"></label>
-                    <select asp-for="ID_Producto" class="form-control" asp-items="ViewBag.ID_Producto"></select>
+                    <label class="control-label">Nombre Producto</label>
+                    <select asp-for="ID_Producto" class="form-control" asp-items="ViewBag.ID_Producto" readonly="true"></select>
                     <span asp-validation-for="ID_Producto" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="ID_Cliente" class="control-label"></label>
-                    <select asp-for="ID_Cliente" class="form-control" asp-items="ViewBag.ID_Cliente"></select>
+                    <label class="control-label">Nombre cliente</label>
+                    <select asp-for="ID_Cliente" class="form-control" asp-items="ViewBag.ID_Cliente" readonly="true"></select>
                     <span asp-validation-for="ID_Cliente" class="text-danger"></span>
                 </div>
                
@@ -50,7 +54,7 @@
                     <span asp-validation-for="Total" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ID_Usuarios" class="control-label"></label>
+                    <label class="control-label">Nombre Usuario</label>
                     <select asp-for="ID_Usuarios" class="form-control" asp-items="ViewBag.ID_Usuarios"></select>
                     <span asp-validation-for="ID_Usuarios" class="text-danger"></span>
                 </div>
