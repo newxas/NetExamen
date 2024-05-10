@@ -220,5 +220,11 @@ namespace ExamenNet.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Usuarios");
         }
+
+        //Menu
+        public IActionResult Menu()
+        {
+            return View();
+        }
     }
 }
