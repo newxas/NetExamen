@@ -4,11 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
+@* <p>
     <a asp-action="Create">Create New</a>
-</p>
+</p> *@
+<div class="container p-5">
+<a class="btn btn-danger" asp-action="Menu">Regresar</a>
 <table class="table">
     <thead>
         <tr>
@@ -31,11 +31,12 @@
                 @Html.DisplayFor(modelItem => item.TotalPromocion)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID_Promocion">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID_Promocion">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID_Promocion">Delete</a>
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.ID_Promocion">Edit</a> |
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ID_Promocion">Details</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID_Promocion">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

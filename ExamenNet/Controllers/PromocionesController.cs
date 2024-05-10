@@ -160,5 +160,10 @@ namespace ExamenNet.Controllers
         {
           return (_context.Promociones?.Any(e => e.ID_Promocion == id)).GetValueOrDefault();
         }
+
+        public IActionResult Menu()
+        {
+            return View();
+        }
     }
 }
