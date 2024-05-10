@@ -8,35 +8,36 @@
     <a asp-action="Create">Create New</a>
 </p> *@
 <div class="container p-5">
-<a class="btn btn-danger" asp-action="Menu">Regresar</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombrePromocion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPromocion)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombrePromocion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPromocion)
-            </td>
-            <td>
-                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.ID_Promocion">Edit</a> |
-                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ID_Promocion">Details</a> |
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID_Promocion">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <a class="btn btn-danger" asp-action="Menu">Regresar</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombrePromocion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalPromocion)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombrePromocion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalPromocion)
+                    </td>
+                    <td>
+                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.ID_Promocion">Edit</a> |
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ID_Promocion">Details</a> |
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID_Promocion">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

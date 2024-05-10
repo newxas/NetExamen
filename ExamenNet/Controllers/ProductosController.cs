@@ -83,7 +83,7 @@ namespace ExamenNet.Controllers
             {
                 return NotFound();
             }
-            ViewData["ID_Sucursal"] = new SelectList(_context.Sucursal, "ID_Sucursal", "ID_Sucursal", productos.ID_Sucursal);
+            ViewData["ID_Sucursal"] = new SelectList(_context.Sucursal, "ID_Sucursal", "NombreProducto", productos.ID_Sucursal);
             return View(productos);
         }
 

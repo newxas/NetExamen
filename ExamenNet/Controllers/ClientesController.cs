@@ -166,6 +166,7 @@ namespace ExamenNet.Controllers
           return (_context.Clientes?.Any(e => e.ID_Cliente == id)).GetValueOrDefault();
         }
 
+        //Menu
         public IActionResult Menu()
         {
             return View();

@@ -4,8 +4,6 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
 <h4>Clientes</h4>
 <hr />
 <div class="row">
@@ -20,7 +18,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="TipoCliente" class="control-label"></label>
-                <input asp-for="TipoCliente" class="form-control" />
+               @*<input asp-for="TipoCliente" class="form-control" /> *@
+               <select asp-for="TipoCliente" class="form-control">
+                   <option value="Publico General">Público General</option>
+                    <option value="Preferencial">Preferencial</option>
+                    <option value="Empresarial">Empresarial</option>
+               </select>
                 <span asp-validation-for="TipoCliente" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -34,14 +37,11 @@
                 <span asp-validation-for="ID_Usuarios" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <a class="btn btn-danger" asp-action="Index">Regresar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
